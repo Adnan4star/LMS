@@ -10,6 +10,9 @@
     <script src="{{ asset('backend/assets/plugins/vectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
     <script src="{{ asset('backend/assets/plugins/chartjs/js/chart.js') }}"></script>
     <script src="{{ asset('backend/assets/js/index.js') }}"></script>
+    {{-- sweet alert v11 js cdn --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
     <!--Password show & hide js -->
     <script>
         $(document).ready(function() {
@@ -31,4 +34,47 @@
     <script>
         new PerfectScrollbar(".app-container");
     </script>
+
+    {{-- Photo Preview Script --}}
+    <script>
+        $(document).ready(function() {
+            $('#photo').on('change', function(event) {
+                const [file] = event.target.files;
+
+                if (file) {
+                    $('#photoPreview')
+                        .attr('src', URL.createObjectURL(file))
+                        .css('display', 'block'); // show image preview
+                }
+            });
+        });
+    </script>
+
     <script src="{{ asset('backend/assets/js/app.js') }}"></script>
+
+    <!----sweetalert---->
+    <script>
+        @if (session('success'))
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: '{{ session('success') }}',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                background: '#fff',
+            });
+        @elseif (session('error'))
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'error',
+                title: '{{ session('error') }}',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                background: '#fff',
+            });
+        @endif
+    </script>

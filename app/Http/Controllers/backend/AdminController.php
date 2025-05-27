@@ -29,4 +29,14 @@ class AdminController extends Controller
 
         return redirect('/admin/login');
     }
+
+    public function index()
+    {
+        return view('backend.admin.profile.index');
+    }
+
+    public function setting()
+    {
+        return view('backend.admin.profile.setting');
+    }
 }

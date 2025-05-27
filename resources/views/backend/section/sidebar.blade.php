@@ -14,7 +14,7 @@
     <!--navigation-->
     <ul class="metismenu" id="menu">
         <li>
-            <a href="javascript:;" class="">
+            <a href="{{ route('admin.dashboard') }}" class="">
                 <div class="parent-icon"><i class="bx bx-category"></i></div>
                 <div class="menu-title">Dashboard</div>
             </a>
@@ -48,7 +48,7 @@
                 </li>
             </ul>
         </li>
-        
+
     </ul>
     <!--end navigation-->
 </div>
