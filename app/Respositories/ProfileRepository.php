@@ -4,9 +4,14 @@ namespace App\Respositories;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\traits\FileUploadTrait; // Import file upload trait
 
 class ProfileRepository
 {
+    use FileUploadTrait; // use file upload trait
+
+
+
     public function findProfile()
     {
         $user_id = Auth::user()->id;
@@ -16,7 +21,12 @@ class ProfileRepository
     public function createOrUpdateProfile($data, $photo)
     {
         $profile = $this->findProfile();
-        // dd($profile);
+
+        //Handle file upload
+        if ($profile) {
+            $data['photo'] = $this->uploadFile($photo, 'user', $profile->photo);
+        }
+
         $profile->update($data);
         return $profile;
     }
