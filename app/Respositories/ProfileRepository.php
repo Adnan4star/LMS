@@ -10,8 +10,6 @@ class ProfileRepository
 {
     use FileUploadTrait; // use file upload trait
 
-
-
     public function findProfile()
     {
         $user_id = Auth::user()->id;

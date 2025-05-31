@@ -26,14 +26,26 @@
 
                     <div class="col-lg-8">
                         <div class="card">
-                            <form action="">
+                            <form action="{{ route('instructor.profile.passwordSetting') }}" method="POST">
+                                @csrf
+
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+
                                 <div class="card-body">
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
                                             <h6 class="mb-0">Current Password</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <input type="password" class="form-control" name="password"
+                                            <input type="password" class="form-control" name="current_password"
                                                 placeholder="Enter your current password" />
                                         </div>
                                     </div>
@@ -61,7 +73,7 @@
                                     <div class="row">
                                         <div class="col-sm-3"></div>
                                         <div class="col-sm-9 text-secondary">
-                                            <input type="button" class="btn btn-primary px-4" value="Save Changes" />
+                                            <input type="submit" class="btn btn-primary px-4" value="Save Changes" />
                                         </div>
                                     </div>
                                 </div>

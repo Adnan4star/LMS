@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\backend\AdminController;
+use App\Http\Controllers\backend\AdminProfileController;
+use App\Http\Controllers\backend\CategoryController;
 use App\Http\Controllers\backend\InstructorController;
 use App\Http\Controllers\backend\InstructorProfileController;
+use App\Http\Controllers\backend\SubcategoryController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,8 +24,13 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('ad
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::post('/logout', [AdminController::class, 'destroy'])->name('logout');
 
-    Route::get('/profile', [AdminController::class, 'index'])->name('profile');
-    Route::get('/setting', [AdminController::class, 'setting'])->name('setting');
+    Route::get('/profile', [AdminProfileController::class, 'index'])->name('profile');
+    Route::post('/profile/store', [AdminProfileController::class, 'store'])->name('profile.store');
+    Route::get('/setting', [AdminProfileController::class, 'setting'])->name('setting');
+    Route::post('/password/setting', [AdminProfileController::class, 'passwordSetting'])->name('profile.passwordSetting');
+
+    Route::resource('category', CategoryController::class);
+    Route::resource('Subcategory', SubcategoryController::class);
 });
 
 /* Instructor login */
@@ -33,8 +41,9 @@ Route::middleware(['auth', 'verified', 'role:instructor'])->prefix('instructor')
     Route::post('/logout', [InstructorController::class, 'destroy'])->name('logout');
 
     Route::get('/profile', [InstructorProfileController::class, 'index'])->name('profile');
-    Route::get('/setting', [InstructorProfileController::class, 'setting'])->name('setting');
     Route::post('/profile/store', [InstructorProfileController::class, 'store'])->name('profile.store');
+    Route::get('/setting', [InstructorProfileController::class, 'setting'])->name('setting');
+    Route::post('/password/setting', [InstructorProfileController::class, 'passwordSetting'])->name('profile.passwordSetting');
 });
 
 Route::middleware('auth')->group(function () {

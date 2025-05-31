@@ -9,7 +9,7 @@ use App\Services\PasswordUpdateService;
 use App\Services\ProfileService;
 use Illuminate\Http\RedirectResponse;
 
-class InstructorProfileController extends Controller
+class AdminProfileController extends Controller
 {
     //create constructor for profile service created in app
     protected $profileService, $passwordUpdateService;
@@ -22,10 +22,9 @@ class InstructorProfileController extends Controller
 
     public function index()
     {
-        return view('backend.instructor.profile.index');
+        return view('backend.admin.profile.index');
     }
 
-    // Using Profile request (php artisan make:request Profile Request)
     public function store(ProfileRequest $request)
     {
         // pass data and files to the service
@@ -35,11 +34,10 @@ class InstructorProfileController extends Controller
 
     public function setting()
     {
-        return view('backend.instructor.profile.setting');
+        return view('backend.admin.profile.setting');
     }
 
-    public function passwordSetting(PasswordUpdateRequest $request)
-    {
+    public function passwordSetting(PasswordUpdateRequest $request) {
         // dd($request->validated());
         $result = $this->passwordUpdateService->updatePassword($request->validated());
 

@@ -10,6 +10,8 @@
     <script src="{{ asset('backend/assets/plugins/vectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
     <script src="{{ asset('backend/assets/plugins/chartjs/js/chart.js') }}"></script>
     <script src="{{ asset('backend/assets/js/index.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
     {{-- sweet alert v11 js cdn --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
@@ -30,6 +32,7 @@
             });
         });
     </script>
+
     <!--app JS-->
     <script>
         new PerfectScrollbar(".app-container");
@@ -47,6 +50,24 @@
                         .css('display', 'block'); // show image preview
                 }
             });
+        });
+    </script>
+
+    {{-- Data tables initialize --}}
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            var table = $('#example2').DataTable({
+                lengthChange: false,
+                buttons: ['copy', 'excel', 'pdf', 'print']
+            });
+
+            table.buttons().container()
+                .appendTo('#example2_wrapper .col-md-6:eq(0)');
         });
     </script>
 
@@ -78,3 +99,5 @@
             });
         @endif
     </script>
+
+    @stack('scripts')
